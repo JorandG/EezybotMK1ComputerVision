@@ -4,7 +4,7 @@ import numpy as np
 aruco = cv2.aruco
 p_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
 img = cv2.imread('inu.jpg')
-corners, ids, rejectedImgPoints = aruco.detectMarkers(img, p_dict) #détection
+corners, ids, rejectedImgPoints = aruco.detectMarkers(img, p_dict) #detection
 
 #Change here
 corners2 = [np.empty((1,4,2))]*4
@@ -15,7 +15,7 @@ m[1] = corners2[1][0][3]
 m[2] = corners2[2][0][0]
 m[3] = corners2[3][0][1]
 
-width, height = (500,500) #Taille de l'image après transformation
+width, height = (500,500) #Size of the image after transformation
 marker_coordinates = np.float32(m)
 true_coordinates   = np.float32([[0,0],[width,0],[width,height],[0,height]])
 trans_mat = cv2.getPerspectiveTransform(marker_coordinates,true_coordinates)
@@ -47,7 +47,7 @@ tr_y = lambda y : y * 150 / 500 #Axe Y 〃
 img_trans_marked = img_trans.copy()
 for i in range(1,n):
   x, y, w, h, size = data[i]
-  if size < 300 : #Ignorer les zones de moins de 300 pixels
+  if size < 300 : #Ignore the area with less than 300 pixels
     continue
   detected_obj.append( dict( x = tr_x(x),
                               y = tr_y(y),
