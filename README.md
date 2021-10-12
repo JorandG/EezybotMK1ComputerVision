@@ -28,6 +28,6 @@ The servos are plugged on the PWN pins 5, 6, 9. And the joystick is plugged on t
 
 # Computer Vision
 
-## Object Postion
+## Object Position
 
 First of all we want to measure the position of an object on the table. For that task we are using OpenCV. 
