@@ -62,4 +62,4 @@ for i in range(1,n):
 # (6)Show the results
 cv2_imshow(img_trans_marked)
 for i, obj in enumerate(detected_obj,1) :
-  print(f'■ Objet détecté{i}Position centrale X={obj["cx"]:>3.0f}mm Y={obj["cy"]:>3.0f}mm ')
+  print(f'■ Object detected{i}Position X={obj["cx"]:>3.0f}mm Y={obj["cy"]:>3.0f}mm ')
