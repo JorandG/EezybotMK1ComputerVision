@@ -10,7 +10,12 @@ This project aims to use the open source robot manipulator EEZYbot MK1 of daGHIZ
 
 # Introduction
 
-•	 ![image](https://user-images.githubusercontent.com/91953623/136940677-a3ddd097-f937-48d2-92ac-823077375fb1.png)
+The MK1 is a 3D printed robot manipulator that can be quite easily be assemble and cheaper so that why it was choosed for this project. It uses 4 SG90 servos and can be controlled from an arduino uno. The model and the assembly steps can be found here: 
+[EEEZYbot MK1](http://www.eezyrobots.it/eba_mk1.html)
+
+The robot arm has 4 DOF: waist/base, shoulder, elbow and gripper. In software, these are referred to as `base/BS`, `upDown/UD`, `frontBack/FB` and `gripper/GR` respectively.
+
+![image](https://user-images.githubusercontent.com/91953623/136940677-a3ddd097-f937-48d2-92ac-823077375fb1.png)
 
 # Joystick Manipulation
 
