@@ -3,24 +3,30 @@ import numpy as np
 
 aruco = cv2.aruco
 p_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
+marker =  [0] * 4 #Initialisation
+for i in range(len(marker)):
+  marker[i] = aruco.drawMarker(p_dict, i, 75) # 75x75 px
+  cv2.imwrite(f'marker{i}.png', marker[i])
+
 img = cv2.imread('inu.jpg')
 corners, ids, rejectedImgPoints = aruco.detectMarkers(img, p_dict) #detection
+
 
 #Change here
 corners2 = [np.empty((1,4,2))]*4
 for i,c in zip(ids.ravel(), corners):
   corners2[i] = c.copy()
-m[0] = corners2[0][0][2]
-m[1] = corners2[1][0][3]
-m[2] = corners2[2][0][0]
-m[3] = corners2[3][0][1]
+marker[0] = corners2[0][0][2]
+marker[1] = corners2[1][0][3]
+marker[2] = corners2[2][0][0]
+marker[3] = corners2[3][0][1]
 
 width, height = (500,500) #Size of the image after transformation
-marker_coordinates = np.float32(m)
+marker_coordinates = np.float32(marker)
 true_coordinates   = np.float32([[0,0],[width,0],[width,height],[0,height]])
 trans_mat = cv2.getPerspectiveTransform(marker_coordinates,true_coordinates)
 img_trans = cv2.warpPerspective(img,trans_mat,(width, height))
-cv2_imshow(img_trans)
+cv2.imshow("sample",img_trans)
 
 tmp = img_trans.copy()
 
@@ -60,6 +66,7 @@ for i in range(1,n):
   cv2.circle(img_trans_marked, (int(center[i][0]),int(center[i][1])),5,(0,0,255),-1)
 
 # (6)Show the results
-cv2_imshow(img_trans_marked)
+cv2.imshow("sample",img_trans_marked)
+cv2.waitKey(5000)
 for i, obj in enumerate(detected_obj,1) :
   print(f'■ Object detected{i}Position X={obj["cx"]:>3.0f}mm Y={obj["cy"]:>3.0f}mm ')
