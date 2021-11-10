@@ -51,7 +51,6 @@ We start with the importations:
 ```
 import cv2
 import numpy as np
-import cv2_imshow
 ```
 
 We will print 4 aruco markers from 0 to 3 from the calibration: 
@@ -82,17 +81,18 @@ corners, ids, rejectedImgPoints = aruco.detectMarkers(img, p_dict) #detection
 corners2 = [np.empty((1,4,2))]*4
 for i,c in zip(ids.ravel(), corners):
   corners2[i] = c.copy()
-m[0] = corners2[0][0][2]
-m[1] = corners2[1][0][3]
-m[2] = corners2[2][0][0]
-m[3] = corners2[3][0][1]
+marker[0] = corners2[0][0][2]
+marker[1] = corners2[1][0][3]
+marker[2] = corners2[2][0][0]
+marker[3] = corners2[3][0][1]
 
 width, height = (500,500) #Size of the image after transformation
 marker_coordinates = np.float32(m)
 true_coordinates   = np.float32([[0,0],[width,0],[width,height],[0,height]])
 trans_mat = cv2.getPerspectiveTransform(marker_coordinates,true_coordinates)
 img_trans = cv2.warpPerspective(img,trans_mat,(width, height))
-cv2_imshow(img_trans)
+cv2.imshow("sample",img_trans)
+cv2.waitKey(5000)
 ```
 
 This is the result you should obtain: 
@@ -140,7 +140,8 @@ for i in range(1,n):
   cv2.circle(img_trans_marked, (int(center[i][0]),int(center[i][1])),5,(0,0,255),-1)
 
 # (6)Show the results
-cv2_imshow(img_trans_marked)
+cv2.imshow("sample",img_trans_marked)
+cv2.waitKey(5000)
 for i, obj in enumerate(detected_obj,1) :
   print(f'■ Object detected{i}Position X={obj["cx"]:>3.0f}mm Y={obj["cy"]:>3.0f}mm ')
 ```
